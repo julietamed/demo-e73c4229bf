@@ -17,6 +17,7 @@
 <main>
   <section class="escenario" aria-label="El frasco se llena, se arma, se abre y deja salir la bruma">
     <div class="escena__fijo">
+      <div id="progreso" class="progreso" aria-hidden="true"><span></span></div>
       <canvas id="secuencia" class="escena__lienzo" role="img" aria-label="El frasco se llena, se arma, se abre y deja salir la bruma"></canvas>
       <canvas id="visor" class="escena__lienzo escena__visor" aria-label="Producto en 3D: arrastra para girarlo"></canvas>
 
@@ -26,16 +27,16 @@
       </div>
       <p class="capitulo" data-desde="20" data-hasta="58"><span class="titular">Gota<br>a gota.</span></p>
       <p class="capitulo" data-desde="68" data-hasta="108"><span class="titular">Se abre,<br>se siente.</span></p>
-      <p class="capitulo" data-desde="124" data-hasta="152"><span class="titular titular--acento">Deja tu estela.</span></p>
+      <p class="capitulo" data-desde="116" data-hasta="154"><span class="titular titular--acento">Deja tu estela.</span></p>
 
       <p class="escena__indicador" data-desde="1" data-hasta="10">Desliza <span aria-hidden="true">↓</span></p>
       <p id="visor-pista" class="escena__pista">Arrastra para girarlo</p>
+      <a id="saltar" class="escena__saltar es-visible" href="#informacion" data-desde="1" data-hasta="149">Ver información <span aria-hidden="true">↓</span></a>
     </div>
     <div id="escena" class="tramo tramo--secuencia"></div>
-    <div id="visor-tramo" class="tramo tramo--visor"></div>
   </section>
 
-  <section class="bloque bloque--prueba"><a class="calificacion" href="https://www.google.com/maps/search/?api=1&amp;query=Estrafalarium%20Perfumer%C3%ADa&amp;query_place_id=ChIJ9X4dOdQpRI4R8Rnh9Nr82cw" target="_blank" rel="noopener"><span class="calificacion__nota">5.0</span><span class="calificacion__texto">en Google · 2 reseñas</span></a>
+  <section id="informacion" class="bloque bloque--prueba"><a class="calificacion" href="https://www.google.com/maps/search/?api=1&amp;query=Estrafalarium%20Perfumer%C3%ADa&amp;query_place_id=ChIJ9X4dOdQpRI4R8Rnh9Nr82cw" target="_blank" rel="noopener"><span class="calificacion__nota">5.0</span><span class="calificacion__texto">en Google · 2 reseñas</span></a>
     <h2 class="bloque__titulo">Para los que se anuncian antes de entrar.</h2>
     <p class="bloque__texto">Una perfumería de Medellín con carácter propio. Mira el frasco de cerca y escríbenos lo que buscas.</p></section>
 

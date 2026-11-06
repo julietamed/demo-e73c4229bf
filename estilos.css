@@ -21,8 +21,12 @@ a { color: inherit; }
   position: sticky; top: 0; height: 100vh; height: 100svh; margin-bottom: -100vh; margin-bottom: -100svh;
   display: grid; place-items: center; overflow: hidden; z-index: 1;
 }
-.tramo--secuencia { height: 800vh; }
-.tramo--visor { height: 140vh; }
+/* Corta a propósito: 5 deslizadas en celular. Justo al terminar, el escenario se suelta y sube la información: nunca hay scroll sin cambios. */
+.tramo--secuencia { height: 450vh; }
+
+.progreso { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: rgba(255, 255, 255, .14); z-index: 4; transition: opacity .3s ease; }
+.progreso span { display: block; height: 100%; background: var(--acento); transform: scaleX(0); transform-origin: left; }
+.progreso.es-fin { opacity: 0; }
 
 .escena__lienzo {
   grid-area: 1 / 1;
@@ -63,9 +67,17 @@ a { color: inherit; }
 .marca img { width: min(74vw, 460px); height: auto; filter: invert(1) brightness(.96); }
 .capitulo__bajada { margin-top: 14px; color: var(--texto-suave); font-size: 1.05rem; letter-spacing: .02em; }
 .escena__indicador, .escena__pista {
-  align-self: end; margin-bottom: 7vh; color: var(--texto-suave); font-size: .95rem; letter-spacing: .03em;
+  align-self: end; margin-bottom: calc(2.5vh + 50px); color: var(--texto-suave); font-size: .95rem; letter-spacing: .03em;
 }
-.escena__pista { margin-bottom: 15vh; }
+.escena__pista { margin-bottom: 172px; } /* por encima de la información que asoma */
+.escena__saltar {
+  grid-area: 1 / 1; align-self: end; z-index: 3; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+  margin-bottom: max(2.5vh, env(safe-area-inset-bottom)); color: var(--texto); font-size: .98rem;
+  text-decoration: underline; text-underline-offset: 4px;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease;
+}
+.escena__saltar span { margin-left: 6px; }
+.escena__saltar.es-visible { opacity: 1; pointer-events: auto; }
 
 /* Pantalla ancha: los titulares van en la columna libre, no sobre el tenis. */
 @media (orientation: landscape) and (min-width: 1000px) {
@@ -80,6 +92,12 @@ a { color: inherit; }
 /* ---------- bloques de contenido ---------- */
 .bloque { position: relative; z-index: 2; padding: 72px 22px; background: var(--fondo); }
 .bloque > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+/* La información asoma como una hoja sobre el final de la animación: se lee la calificación encima del botón fijo y se entiende que la página sigue. */
+.escenario + .bloque {
+  /* Asoma lo necesario para leer la calificación, pero solo en el espacio libre bajo el producto: nunca tapa su base ni la marca. */
+  margin-top: calc(-1 * max(70px, min(156px + env(safe-area-inset-bottom), (100vh - var(--lado-lienzo)) / 2 + 40px))); padding-top: 28px;
+  border-radius: 22px 22px 0 0; box-shadow: 0 -14px 40px rgba(0, 0, 0, .55);
+}
 .bloque__titulo {
   font-family: "Titulos", Impact, sans-serif; font-weight: 400; text-transform: uppercase;
   font-size: clamp(2.2rem, 9vw, 4rem); line-height: 1.06;
@@ -118,6 +136,20 @@ a { color: inherit; }
   opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .3s ease, transform .3s ease;
 }
 .cta-fija.es-visible { opacity: 1; transform: none; pointer-events: auto; }
+
+/* Pantallas bajas: abajo ya no cabe sin pisar el producto. */
+@media (max-height: 720px) {
+  .escena__pista { align-self: start; margin: 14px 0 0; }
+}
+
+/* ---------- pantalla horizontal: el producto ocupa todo el alto, la hoja solo asoma y el botón se aparta ---------- */
+@media (orientation: landscape) {
+  .escenario + .bloque { padding-top: 12px; }
+  .cta-fija { left: auto; right: 24px; width: min(320px, 44vw); margin: 0; }
+}
+@media (orientation: landscape) and (min-width: 1000px) {
+  .escena__pista { align-self: center; justify-self: start; margin: 0 0 0 clamp(24px, 3.5vw, 64px); }
+}
 
 /* ---------- movimiento reducido: sin transiciones automáticas ---------- */
 @media (prefers-reduced-motion: reduce) {
