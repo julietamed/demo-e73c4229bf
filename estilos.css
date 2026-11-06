@@ -1,0 +1,125 @@
+@font-face { font-family: "Titulos"; src: url("fuentes/titulos.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Texto"; src: url("fuentes/texto.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+
+:root {
+  --fondo-escena: #020203;
+  --lado-lienzo: min(100vw, 100vh);
+}
+@supports (height: 100svh) {
+  :root { --lado-lienzo: min(100vw, 100svh); }
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { background: var(--fondo-escena); -webkit-text-size-adjust: 100%; }
+body { background: var(--fondo); color: var(--texto); overflow-x: clip; font-family: "Texto", system-ui, sans-serif; line-height: 1.5; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+
+/* ---------- escenario ---------- */
+.escenario { position: relative; background: var(--fondo-escena); }
+.escena__fijo {
+  position: sticky; top: 0; height: 100vh; height: 100svh; margin-bottom: -100vh; margin-bottom: -100svh;
+  display: grid; place-items: center; overflow: hidden; z-index: 1;
+}
+.tramo--secuencia { height: 800vh; }
+.tramo--visor { height: 140vh; }
+
+.escena__lienzo {
+  grid-area: 1 / 1;
+  display: block; width: var(--lado-lienzo); height: var(--lado-lienzo);
+  /* El borde del fotograma se funde con el fondo. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+@media (orientation: landscape) {
+  .escena__lienzo {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
+  }
+}
+.escena__visor {
+  opacity: 0; pointer-events: none; transition: opacity .35s ease;
+  touch-action: pan-y; cursor: grab;
+}
+.escena__visor.es-visible { opacity: 1; pointer-events: auto; }
+.escena__visor:active { cursor: grabbing; }
+
+/* ---------- capítulos sobre la animación ---------- */
+.capitulo, .escena__indicador, .escena__pista {
+  grid-area: 1 / 1; opacity: 0; transition: opacity .3s ease; pointer-events: none; z-index: 2;
+}
+.capitulo.es-visible, .escena__indicador.es-visible, .escena__pista.es-visible { opacity: 1; }
+.capitulo {
+  align-self: start; justify-self: stretch; text-align: center;
+  padding: max(7vh, 40px) 20px 56px;
+  background: linear-gradient(to bottom, rgba(2, 2, 3, .82), rgba(2, 2, 3, .55) 62%, transparent);
+}
+.titular {
+  display: block; font-family: "Titulos", Impact, sans-serif; font-weight: 400; text-transform: uppercase;
+  font-size: clamp(2.7rem, 13vw, 6rem); line-height: 1.02; letter-spacing: .01em;
+}
+.titular--acento { color: var(--acento); }
+.marca { line-height: 0; }
+.marca img { width: min(74vw, 460px); height: auto; filter: invert(1) brightness(.96); }
+.capitulo__bajada { margin-top: 14px; color: var(--texto-suave); font-size: 1.05rem; letter-spacing: .02em; }
+.escena__indicador, .escena__pista {
+  align-self: end; margin-bottom: 7vh; color: var(--texto-suave); font-size: .95rem; letter-spacing: .03em;
+}
+.escena__pista { margin-bottom: 15vh; }
+
+/* Pantalla ancha: los titulares van en la columna libre, no sobre el tenis. */
+@media (orientation: landscape) and (min-width: 1000px) {
+  .capitulo {
+    align-self: center; justify-self: start; text-align: left; background: none;
+    width: calc((100vw - var(--lado-lienzo)) / 2 + 8vw); padding: 0 0 0 clamp(24px, 3.5vw, 64px);
+  }
+  .titular { font-size: clamp(2.6rem, 4.6vw, 5rem); }
+  .marca img { width: 100%; max-width: 300px; }
+}
+
+/* ---------- bloques de contenido ---------- */
+.bloque { position: relative; z-index: 2; padding: 72px 22px; background: var(--fondo); }
+.bloque > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+.bloque__titulo {
+  font-family: "Titulos", Impact, sans-serif; font-weight: 400; text-transform: uppercase;
+  font-size: clamp(2.2rem, 9vw, 4rem); line-height: 1.06;
+}
+.bloque__texto { margin-top: 18px; color: var(--texto-suave); font-size: 1.08rem; }
+
+.calificacion { display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; text-decoration: none; color: var(--acento); }
+.calificacion__nota { font-family: "Titulos", Impact, sans-serif; font-size: 3.2rem; line-height: 1; }
+.calificacion__texto { color: var(--texto); font-size: 1rem; text-decoration: underline; text-underline-offset: 3px; }
+
+.bloque--ejemplo { background: var(--superficie); }
+.etiqueta-ejemplo {
+  display: table; padding: 4px 12px; margin-bottom: 20px; border-radius: 99px;
+  background: var(--acento); color: var(--sobre-acento); font-size: .85rem; font-weight: 700; letter-spacing: .03em;
+}
+.tarjetas { display: grid; gap: 12px; margin-top: 28px; }
+.tarjeta { display: flex; justify-content: space-between; align-items: baseline; padding: 20px; border: 1px solid #34343a; border-radius: 12px; }
+.tarjeta__nombre { font-size: 1.05rem; }
+.tarjeta__precio { font-family: "Titulos", Impact, sans-serif; font-size: 1.5rem; }
+.opinion { margin-top: 18px; padding-left: 16px; border-left: 3px solid var(--acento); font-size: 1.05rem; }
+.opinion cite { display: block; margin-top: 6px; color: var(--texto-suave); font-style: normal; font-size: .9rem; }
+
+.direccion { margin-top: 18px; color: var(--texto-suave); font-style: normal; font-size: 1.08rem; }
+.enlaces { display: grid; gap: 12px; margin-top: 28px; padding-bottom: 72px; }
+.boton {
+  display: block; padding: 16px 20px; min-height: 52px; border: 1px solid #4a4a50; border-radius: 12px;
+  text-align: center; text-decoration: none; font-weight: 600;
+}
+.boton--principal { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+
+/* ---------- botón fijo de contacto ---------- */
+.cta-fija {
+  position: fixed; left: 16px; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 5;
+  display: block; max-width: 420px; margin: 0 auto; padding: 16px 20px; min-height: 52px; border-radius: 12px;
+  background: var(--acento); color: var(--sobre-acento); text-align: center; text-decoration: none; font-weight: 700;
+  opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+}
+.cta-fija.es-visible { opacity: 1; transform: none; pointer-events: auto; }
+
+/* ---------- movimiento reducido: sin transiciones automáticas ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

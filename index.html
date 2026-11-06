@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#020203">
+<title>Estrafalarium — Perfumería en Medellín</title>
+<link rel="icon" href="data:,">
+<link rel="preload" as="font" type="font/woff2" href="fuentes/titulos.woff2" crossorigin>
+<style>:root{ --fondo:#0F0A14;--superficie:#1C1324;--texto:#F4EDE4;--texto-suave:#B2A6B5;--acento:#C77DFF;--sobre-acento:#0F0A14; }</style>
+<link rel="stylesheet" href="estilos.css">
+<script id="datos-sitio" type="application/json">{"total": 180, "lados": [720, 1080], "visor": false, "camara": null, "giro": {"total": 48}}</script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<main>
+  <section class="escenario" aria-label="El frasco se llena, se arma, se abre y deja salir la bruma">
+    <div class="escena__fijo">
+      <canvas id="secuencia" class="escena__lienzo" role="img" aria-label="El frasco se llena, se arma, se abre y deja salir la bruma"></canvas>
+      <canvas id="visor" class="escena__lienzo escena__visor" aria-label="Producto en 3D: arrastra para girarlo"></canvas>
+
+      <div class="capitulo capitulo--portada es-visible" data-desde="1" data-hasta="14">
+        <h1 class="marca" aria-label="Estrafalarium"><img src="wordmark.svg" alt=""></h1>
+        <p class="capitulo__bajada">Perfumería en Medellín</p>
+      </div>
+      <p class="capitulo" data-desde="20" data-hasta="58"><span class="titular">Gota<br>a gota.</span></p>
+      <p class="capitulo" data-desde="68" data-hasta="108"><span class="titular">Se abre,<br>se siente.</span></p>
+      <p class="capitulo" data-desde="124" data-hasta="152"><span class="titular titular--acento">Deja tu estela.</span></p>
+
+      <p class="escena__indicador" data-desde="1" data-hasta="10">Desliza <span aria-hidden="true">↓</span></p>
+      <p id="visor-pista" class="escena__pista">Arrastra para girarlo</p>
+    </div>
+    <div id="escena" class="tramo tramo--secuencia"></div>
+    <div id="visor-tramo" class="tramo tramo--visor"></div>
+  </section>
+
+  <section class="bloque bloque--prueba"><a class="calificacion" href="https://www.google.com/maps/search/?api=1&amp;query=Estrafalarium%20Perfumer%C3%ADa&amp;query_place_id=ChIJ9X4dOdQpRI4R8Rnh9Nr82cw" target="_blank" rel="noopener"><span class="calificacion__nota">5.0</span><span class="calificacion__texto">en Google · 2 reseñas</span></a>
+    <h2 class="bloque__titulo">Para los que se anuncian antes de entrar.</h2>
+    <p class="bloque__texto">Una perfumería de Medellín con carácter propio. Mira el frasco de cerca y escríbenos lo que buscas.</p></section>
+
+  <section class="bloque bloque--ejemplo" data-ejemplo><p class="etiqueta-ejemplo">Contenido de ejemplo</p><h2 class="bloque__titulo">Así se verían tus fragancias.</h2><p class="bloque__texto">Precios, nombres y opiniones de esta sección son de ejemplo: aquí irían los reales.</p><ul class="tarjetas"><li class="tarjeta"><span class="tarjeta__nombre">Fragancia 01</span><span class="tarjeta__precio">$189.900</span></li><li class="tarjeta"><span class="tarjeta__nombre">Fragancia 02</span><span class="tarjeta__precio">$219.900</span></li><li class="tarjeta"><span class="tarjeta__nombre">Fragancia 03</span><span class="tarjeta__precio">$249.900</span></li></ul><blockquote class="opinion">“Aquí iría la opinión de un cliente real.”<cite>Cliente de ejemplo</cite></blockquote><blockquote class="opinion">“Y aquí, otra opinión real.”<cite>Cliente de ejemplo</cite></blockquote></section>
+
+  <section class="bloque bloque--contacto"><h2 class="bloque__titulo">Ven a conocer tu aroma o escríbenos por WhatsApp.</h2><address class="direccion">Cra 67 #92C - 15, Francisco Zea<br>Medellín, Antioquia</address><div class="enlaces"><a class="boton boton--principal" href="https://wa.me/573104601595?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes" target="_blank" rel="noopener">Escríbenos por WhatsApp</a><a class="boton" href="https://www.google.com/maps/search/?api=1&amp;query=Estrafalarium%20Perfumer%C3%ADa&amp;query_place_id=ChIJ9X4dOdQpRI4R8Rnh9Nr82cw" target="_blank" rel="noopener">Cómo llegar</a><a class="boton" href="https://www.instagram.com/estrafalariumperfumeria/" target="_blank" rel="noopener">Instagram</a></div></section>
+</main>
+<a id="cta-fija" class="cta-fija" href="https://wa.me/573104601595?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+</body>
+</html>
